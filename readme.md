@@ -27,7 +27,7 @@ To utilize the example bot, you can simply run the client and the bot handler us
 
 1. Run the Bot handler by executing the following command in the terminal:
     ```
-    docker run -it goutamverma/feedback_db_server:latest
+    docker run goutamverma/feedback_handler:latest
     ```
 
 2. Run the client by executing the following command in the another terminal:
