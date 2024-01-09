@@ -1,0 +1,7 @@
+flask
+flask-cors
+flask-socketio
+pika
+werkzeug
+python-dotenv
+pymongo

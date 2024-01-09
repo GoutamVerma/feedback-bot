@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Feedbacks</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"></script>
+    <script>
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+    
+        socket.on('connection_response', function(data) {
+            // console.log(data.data);
+        });
+    
+        socket.on('new_message', function(data) {
+            // console.log(data.message);
+            updateMessage(data.message);
+        });
+    
+        function updateMessage(message) {
+            // Assuming you have a table with id "message-table"
+            var messageTable = document.getElementById('message-table');
+
+            var newRow = messageTable.insertRow();
+
+            var usernameCell = newRow.insertCell();
+            usernameCell.innerHTML = message['username'];
+
+            var feedbackCell = newRow.insertCell();
+            feedbackCell.innerHTML = message['feedback'];
+
+            var dateTimeCell = newRow.insertCell();
+            dateTimeCell.innerHTML = message['date_time'];
+
+            var userIdCell = newRow.insertCell();
+            userIdCell.innerHTML = message['user_id'];
+
+            // Scroll to the bottom to show the latest message
+            messageTable.scrollTop = messageTable.scrollHeight;
+        }
+        </script>
+
+        </head>
+        <body>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#">Live Feedbacks</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+              </nav>
+            <table class = "table" id="message-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Username</th>
+                        <th scope="col">Message</th>
+                        <th scope="col">Date & Time</th>
+                        <th scope="col">User ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Initial content or placeholder -->
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+</body>
+</html>
